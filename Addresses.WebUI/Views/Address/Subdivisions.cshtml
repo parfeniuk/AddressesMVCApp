@@ -1,0 +1,40 @@
+﻿@model Addresses.WebUI.Models.VmSubdivisions
+@{
+    ViewBag.Title = "Subdivisions";
+}
+
+<h2>Subdivisions</h2>
+<div class="row">
+    <div class="col-md-4">
+        @Html.DropDownList("SubdivisionId", null, new { @class = "form-control" })
+    </div>
+    <div id="listsubdivisions" class="col-md-8">
+        @{
+            Html.RenderAction("ListAddresses",new {id=1 });
+        }
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(function () {
+            // Select Subdivision from dropdown list
+            $('#SubdivisionId').change(function () {
+                $('#listsubdivisions').load('@Url.Action("ListAddresses", "Address")', { id: $('#SubdivisionId').val() });
+            });
+       
+            // Click on paging button
+            $('body').on('click', '.mypaging', function () {
+                var postData = { "id": $('#SubdivisionId').val(), "CurrentPage": $(this).text() };
+                $('#listsubdivisions').load('@Url.Action("ListAddresses", "Address")', postData);
+            })
+
+            // Click on Delete button in Partial View Subdivisions
+            $('body').on('click', '.btnAddressDelete', function (e) {
+                e.preventDefault();
+                alert("Delete stub");
+            });
+        });
+    </script>
+}

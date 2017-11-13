@@ -1,0 +1,48 @@
+﻿@model IQueryable<Addresses.BOL.SubdivisionDTO>
+@{
+    ViewBag.Title = "List of Utility Services Companies";
+}
+
+<h2>List of Utility Services Companies</h2>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-left">
+    <div class="list-inline">
+        @foreach (var item in Model.OrderBy(i => i.SubdivisionName))
+        {
+            if (Model.First() == item)
+            {
+                <a href="#" class="btn btn-info btnSubdivisionStat active" data-id=@item.SubdivisionId>
+                    @item.SubdivisionName
+                </a>
+            }
+            else
+            {
+                <a href="#" class="btn btn-info btnSubdivisionStat" data-id=@item.SubdivisionId>
+                    @item.SubdivisionName
+                </a>
+            }
+        }
+    </div>
+</div>
+<div id="subdivisionStat">
+    @{
+        Html.RenderAction("SubdivisionStat");
+    }
+</div>
+
+@section scripts
+{
+    <script>
+        $(function () {
+            $('body').on('click', '.btnSubdivisionStat', function (e) {
+                var id = $(this).attr('data-id').valueOf();
+                var activeBtn = $(this);
+                $('#subdivisionStat').load('@Url.Action("SubdivisionStat", "Home")', { id: id });
+                // Activate selected button
+                $('.btnSubdivisionStat').each(function () {
+                    $(this).removeClass('active'); 
+                });
+                activeBtn.addClass('active');
+            })
+        });
+    </script>
+}

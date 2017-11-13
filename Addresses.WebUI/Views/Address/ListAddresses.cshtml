@@ -1,0 +1,55 @@
+﻿@using Addresses.WebUI.HtmlHelpers
+@model Addresses.WebUI.Models.VmListAddresses
+
+@{
+    ViewBag.Title = "ListAddresses";
+}
+
+<h2>Addresses</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Edit",new {id=0 })
+</p>
+<div class="table-responsive">
+    <table class="table table-hover">
+        <tr class="page-header">
+            <th>
+                Street
+                @*@Html.DisplayNameFor(model => model.Cities.Region.RegionName)*@
+            </th>
+            <th>
+                House
+                @*@Html.DisplayNameFor(model => model.CityName)*@
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.CounterByPage.OrderBy(i=>i.StreetId))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StreetName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.House)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", 
+                   new { id = item.AddressId },
+                   new { @data_id = item.SubdivisionId, @class = "btn btn-warning btn-sm" })
+                    @Html.ActionLink("Details", "Details", 
+                   new { id = item.AddressId},
+                   new { @data_id = item.SubdivisionId, @class = "btn btn-info  btn-sm" })
+                    @Html.ActionLink("Delete", "Delete", 
+                   new { id = item.AddressId },
+                   new { @data_id = item.SubdivisionId, @class = "btn btn-danger btn-sm btnAddressDelete" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<div>
+    @Html.PageLinks(Model.Paging)
+</div>

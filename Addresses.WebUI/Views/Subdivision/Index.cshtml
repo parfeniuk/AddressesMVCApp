@@ -1,0 +1,38 @@
+﻿@model IQueryable<Addresses.BOL.SubdivisionDTO>
+@{
+    ViewBag.Title = "List of Utility Services Companies";
+}
+
+<h2>List of Utility Services Companies</h2>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-left">
+        <ul class="list-group">
+            @foreach (var item in Model.OrderBy(i => i.SubdivisionName))
+            {
+                <li class="list-group-item">
+                    @item.SubdivisionName
+                    @Html.ActionLink("Edit", "Edit",
+                   new { id = item.SubdivisionId },
+                   new { @data_id = item.SubdivisionId, @class = "btn btn-warning" })
+                    @Html.ActionLink("Details", "Details",
+                   new { id = item.SubdivisionId },
+                   new { @data_id = item.SubdivisionId, @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "Delete",
+                   new { id = item.SubdivisionId },
+                   new { @data_id = item.SubdivisionId, @class = "btn btn-danger btnSubdivisionDelete" })
+                </li>
+                @*<li class="list-group-item">
+
+                </li>*@
+            }
+        </ul>
+    </div>
+
+@section scripts
+{
+    <script>
+        $('.btnSubdivisionDelete').click(function (e) {
+            e.preventDefault();
+            alert("Delete stub");
+        });
+    </script>
+}

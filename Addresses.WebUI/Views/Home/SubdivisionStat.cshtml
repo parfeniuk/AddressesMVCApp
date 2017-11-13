@@ -1,0 +1,27 @@
+﻿@model Addresses.WebUI.Models.VmUtilityServiceStat
+
+<h3>@ViewBag.SubdivisionName Profile</h3>
+<div class="row">
+    <div class="col-sm-4 col-md-3">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <strong>Streets</strong> 
+                <span class="badge">@Model.StreetsNumber</span>
+            </li>
+            <li class="list-group-item">
+                <strong>Houses</strong>
+                <span class="badge">@Model.HousesNumber</span>
+            </li>
+            <li class="list-group-item">
+                <strong>Entrances</strong>
+                <span class="badge">@Model.EntrancesNumber</span>
+            </li>
+            <li class="list-group-item">
+                <strong>Floors</strong>
+                <span class="badge">@Model.FloorsNumber</span>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
